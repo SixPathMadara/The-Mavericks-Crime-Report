@@ -1,0 +1,9 @@
+# Ignore Visual Studio temporary files, user-specific files, and directories
+#.gitignore specific to the web api
+.vscode/
+bin/
+obj/
+.vs/
+*.user
+*.suo
+*.sln.docstates

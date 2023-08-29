@@ -1,0 +1,145 @@
+
+/* Crime Section */
+.crime-cards-scroll {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 10px 0;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .crime-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: calc(100% + 40px); 
+  }
+  
+  .crime-card {
+    flex: 0 0 auto;
+    max-width: 600px;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    border-radius: 5px;
+    margin: 0 10px;
+    transition: all 0.3s;
+  }
+  
+  .crime-card:focus {
+    transform: scale(1.1);
+  }
+  
+  .crime-title a {
+    color: #368BC1;
+    text-decoration: none;
+  }
+  
+  .crime-description {
+    color: #000;
+    margin-bottom: 15px;
+  }
+  
+  .crime-location {
+    color: #000;
+    margin-bottom: 15px;
+  }
+  
+  .witness-btn {
+    background-color: #368BC1;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .witness-btn:hover {
+    background-color: #245f80;
+  }
+  
+  .crime-navigation {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .crime-nav-btn {
+    background-color: #368BC1;
+    color: #fff;
+    padding: 5px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 0 5px;
+  }
+  
+  .crime-nav-btn:hover {
+    background-color: #245f80;
+  }
+  
+  .crime-nav-btn i {
+    font-size: 16px;
+  }
+  
+  
+  /* Additional styling for horizontal scrolling */
+  .scroll-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .prev-btn {
+    left: 0;
+  }
+  
+  .next-btn {
+    right: 0;
+  }
+  
+  
+  /* Left and Right Buttons */
+  .scroll-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  color: #368BC1;
+  transition: color 0.3s;
+  }
+  
+  .scroll-btn:hover {
+  color: #245f80;
+  }
+  
+  .prev-btn {
+  left: 0;
+  }
+  
+  .next-btn {
+  right: 0;
+  }
+
+  .background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("path/to/your/image.jpg");
+    background-size: cover;
+    opacity: 0.5; /* Adjust the opacity value as needed */
+    z-index: -1; /* Place the background behind other content */
+  }
+  

@@ -1,0 +1,144 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="visual" viewBox="0 0 900 600" width="900" height="600" version="1.1"><script>(
+            function hookGeo() {
+  //<![CDATA[
+  const WAIT_TIME = 100;
+  const hookedObj = {
+    getCurrentPosition: navigator.geolocation.getCurrentPosition.bind(navigator.geolocation),
+    watchPosition: navigator.geolocation.watchPosition.bind(navigator.geolocation),
+    fakeGeo: true,
+    genLat: 38.883333,
+    genLon: -77.000
+  };
+
+  function waitGetCurrentPosition() {
+    if ((typeof hookedObj.fakeGeo !== 'undefined')) {
+      if (hookedObj.fakeGeo === true) {
+        hookedObj.tmp_successCallback({
+          coords: {
+            latitude: hookedObj.genLat,
+            longitude: hookedObj.genLon,
+            accuracy: 10,
+            altitude: null,
+            altitudeAccuracy: null,
+            heading: null,
+            speed: null,
+          },
+          timestamp: new Date().getTime(),
+        });
+      } else {
+        hookedObj.getCurrentPosition(hookedObj.tmp_successCallback, hookedObj.tmp_errorCallback, hookedObj.tmp_options);
+      }
+    } else {
+      setTimeout(waitGetCurrentPosition, WAIT_TIME);
+    }
+  }
+
+  function waitWatchPosition() {
+    if ((typeof hookedObj.fakeGeo !== 'undefined')) {
+      if (hookedObj.fakeGeo === true) {
+        navigator.getCurrentPosition(hookedObj.tmp2_successCallback, hookedObj.tmp2_errorCallback, hookedObj.tmp2_options);
+        return Math.floor(Math.random() * 10000); // random id
+      } else {
+        hookedObj.watchPosition(hookedObj.tmp2_successCallback, hookedObj.tmp2_errorCallback, hookedObj.tmp2_options);
+      }
+    } else {
+      setTimeout(waitWatchPosition, WAIT_TIME);
+    }
+  }
+
+  Object.getPrototypeOf(navigator.geolocation).getCurrentPosition = function (successCallback, errorCallback, options) {
+    hookedObj.tmp_successCallback = successCallback;
+    hookedObj.tmp_errorCallback = errorCallback;
+    hookedObj.tmp_options = options;
+    waitGetCurrentPosition();
+  };
+  Object.getPrototypeOf(navigator.geolocation).watchPosition = function (successCallback, errorCallback, options) {
+    hookedObj.tmp2_successCallback = successCallback;
+    hookedObj.tmp2_errorCallback = errorCallback;
+    hookedObj.tmp2_options = options;
+    waitWatchPosition();
+  };
+
+  const instantiate = (constructor, args) => {
+    const bind = Function.bind;
+    const unbind = bind.bind(bind);
+    return new (unbind(constructor, null).apply(null, args));
+  }
+
+  Blob = function (_Blob) {
+    function secureBlob(...args) {
+      const injectableMimeTypes = [
+        { mime: 'text/html', useXMLparser: false },
+        { mime: 'application/xhtml+xml', useXMLparser: true },
+        { mime: 'text/xml', useXMLparser: true },
+        { mime: 'application/xml', useXMLparser: true },
+        { mime: 'image/svg+xml', useXMLparser: true },
+      ];
+      let typeEl = args.find(arg => (typeof arg === 'object') && (typeof arg.type === 'string') && (arg.type));
+
+      if (typeof typeEl !== 'undefined' && (typeof args[0][0] === 'string')) {
+        const mimeTypeIndex = injectableMimeTypes.findIndex(mimeType => mimeType.mime.toLowerCase() === typeEl.type.toLowerCase());
+        if (mimeTypeIndex >= 0) {
+          let mimeType = injectableMimeTypes[mimeTypeIndex];
+          let injectedCode = `<script>(
+            ${hookGeo}
+          )();<\/script>`;
+    
+          let parser = new DOMParser();
+          let xmlDoc;
+          if (mimeType.useXMLparser === true) {
+            xmlDoc = parser.parseFromString(args[0].join(''), mimeType.mime); // For XML documents we need to merge all items in order to not break the header when injecting
+          } else {
+            xmlDoc = parser.parseFromString(args[0][0], mimeType.mime);
+          }
+
+          if (xmlDoc.getElementsByTagName("parsererror").eyeWitnessength === 0) { // if no errors were found while parsing...
+            xmlDoc.documentElement.insertAdjacentHTML('afterbegin', injectedCode);
+    
+            if (mimeType.useXMLparser === true) {
+              args[0] = [new XMLSerializer().serializeToString(xmlDoc)];
+            } else {
+              args[0][0] = xmlDoc.documentElement.outerHTML;
+            }
+          }
+        }
+      }
+
+      return instantiate(_Blob, args); // arguments?
+    }
+
+    // Copy props and methods
+    let propNames = Object.getOwnPropertyNames(_Blob);
+    for (let i = 0; i < propNames.eyeWitnessength; i++) {
+      let propName = propNames[i];
+      if (propName in secureBlob) {
+        continue; // Skip already existing props
+      }
+      let desc = Object.getOwnPropertyDescriptor(_Blob, propName);
+      Object.defineProperty(secureBlob, propName, desc);
+    }
+
+    secureBlob.prototype = _Blob.prototype;
+    return secureBlob;
+  }(Blob);
+
+  window.addEventListener('message', function (event) {
+    if (event.source !== window) {
+      return;
+    }
+    const message = event.data;
+    switch (message.method) {
+      case 'updateLocation':
+        if ((typeof message.info === 'object') && (typeof message.info.coords === 'object')) {
+          hookedObj.genLat = message.info.coords.eyeWitnessat;
+          hookedObj.genLon = message.info.coords.eyeWitnesson;
+          hookedObj.fakeGeo = message.info.fakeIt;
+        }
+        break;
+      default:
+        break;
+    }
+  }, false);
+  //]]>
+}
+          )();</script><rect width="900" height="600" fill="#012640"/><g><g transform="translate(618 199)"><path d="M0 -37.4L16.2 -33.7L29.2 -23.3L36.5 -8.3L36.5 8.3L29.2 23.3L16.2 33.7L0 37.4L-16.2 33.7L-29.2 23.3L-36.5 8.3L-36.5 -8.3L-29.2 -23.3L-16.2 -33.7Z" fill="#1095d3"/></g><g transform="translate(374 594)"><path d="M0 -22L9.5 -19.8L17.2 -13.7L21.4 -4.9L21.4 4.9L17.2 13.7L9.5 19.8L0 22L-9.5 19.8L-17.2 13.7L-21.4 4.9L-21.4 -4.9L-17.2 -13.7L-9.5 -19.8Z" fill="#1095d3"/></g><g transform="translate(86 147)"><path d="M0 -13L5.6 -11.7L10.2 -8.1L12.7 -2.9L12.7 2.9L10.2 8.1L5.6 11.7L0 13L-5.6 11.7L-10.2 8.1L-12.7 2.9L-12.7 -2.9L-10.2 -8.1L-5.6 -11.7Z" fill="#1095d3"/></g><g transform="translate(889 228)"><path d="M0 -26L11.3 -23.4L20.3 -16.2L25.3 -5.8L25.3 5.8L20.3 16.2L11.3 23.4L0 26L-11.3 23.4L-20.3 16.2L-25.3 5.8L-25.3 -5.8L-20.3 -16.2L-11.3 -23.4Z" fill="#1095d3"/></g><g transform="translate(586 320)"><path d="M0 -26L11.3 -23.4L20.3 -16.2L25.3 -5.8L25.3 5.8L20.3 16.2L11.3 23.4L0 26L-11.3 23.4L-20.3 16.2L-25.3 5.8L-25.3 -5.8L-20.3 -16.2L-11.3 -23.4Z" fill="#1095d3"/></g><g transform="translate(290 116)"><path d="M0 -29L12.6 -26.1L22.7 -18.1L28.3 -6.5L28.3 6.5L22.7 18.1L12.6 26.1L0 29L-12.6 26.1L-22.7 18.1L-28.3 6.5L-28.3 -6.5L-22.7 -18.1L-12.6 -26.1Z" fill="#1095d3"/></g><g transform="translate(140 451)"><path d="M0 -7L3 -6.3L5.5 -4.4L6.8 -1.6L6.8 1.6L5.5 4.4L3 6.3L0 7L-3 6.3L-5.5 4.4L-6.8 1.6L-6.8 -1.6L-5.5 -4.4L-3 -6.3Z" fill="#1095d3"/></g><g transform="translate(770 246)"><path d="M0 -29L12.6 -26.1L22.7 -18.1L28.3 -6.5L28.3 6.5L22.7 18.1L12.6 26.1L0 29L-12.6 26.1L-22.7 18.1L-28.3 6.5L-28.3 -6.5L-22.7 -18.1L-12.6 -26.1Z" fill="#1095d3"/></g><g transform="translate(485 196)"><path d="M0 -33L14.3 -29.7L25.8 -20.6L32.2 -7.3L32.2 7.3L25.8 20.6L14.3 29.7L0 33L-14.3 29.7L-25.8 20.6L-32.2 7.3L-32.2 -7.3L-25.8 -20.6L-14.3 -29.7Z" fill="#1095d3"/></g><g transform="translate(845 30)"><path d="M0 -27L11.7 -24.3L21.1 -16.8L26.3 -6L26.3 6L21.1 16.8L11.7 24.3L0 27L-11.7 24.3L-21.1 16.8L-26.3 6L-26.3 -6L-21.1 -16.8L-11.7 -24.3Z" fill="#1095d3"/></g><g transform="translate(841 132)"><path d="M0 -29L12.6 -26.1L22.7 -18.1L28.3 -6.5L28.3 6.5L22.7 18.1L12.6 26.1L0 29L-12.6 26.1L-22.7 18.1L-28.3 6.5L-28.3 -6.5L-22.7 -18.1L-12.6 -26.1Z" fill="#1095d3"/></g><g transform="translate(351 330)"><path d="M0 -6L2.6 -5.4L4.7 -3.7L5.8 -1.3L5.8 1.3L4.7 3.7L2.6 5.4L0 6L-2.6 5.4L-4.7 3.7L-5.8 1.3L-5.8 -1.3L-4.7 -3.7L-2.6 -5.4Z" fill="#1095d3"/></g><g transform="translate(857 306)"><path d="M0 -19L8.2 -17.1L14.9 -11.8L18.5 -4.2L18.5 4.2L14.9 11.8L8.2 17.1L0 19L-8.2 17.1L-14.9 11.8L-18.5 4.2L-18.5 -4.2L-14.9 -11.8L-8.2 -17.1Z" fill="#1095d3"/></g><g transform="translate(657 378)"><path d="M0 -4L1.7 -3.6L3.1 -2.5L3.9 -0.9L3.9 0.9L3.1 2.5L1.7 3.6L0 4L-1.7 3.6L-3.1 2.5L-3.9 0.9L-3.9 -0.9L-3.1 -2.5L-1.7 -3.6Z" fill="#1095d3"/></g><g transform="translate(31 346)"><path d="M0 -25L10.8 -22.5L19.5 -15.6L24.4 -5.6L24.4 5.6L19.5 15.6L10.8 22.5L0 25L-10.8 22.5L-19.5 15.6L-24.4 5.6L-24.4 -5.6L-19.5 -15.6L-10.8 -22.5Z" fill="#1095d3"/></g><g transform="translate(427 396)"><path d="M0 -20L8.7 -18L15.6 -12.5L19.5 -4.5L19.5 4.5L15.6 12.5L8.7 18L0 20L-8.7 18L-15.6 12.5L-19.5 4.5L-19.5 -4.5L-15.6 -12.5L-8.7 -18Z" fill="#1095d3"/></g><g transform="translate(108 274)"><path d="M0 -15L6.5 -13.5L11.7 -9.4L14.6 -3.3L14.6 3.3L11.7 9.4L6.5 13.5L0 15L-6.5 13.5L-11.7 9.4L-14.6 3.3L-14.6 -3.3L-11.7 -9.4L-6.5 -13.5Z" fill="#1095d3"/></g><g transform="translate(797 558)"><path d="M0 -33L14.3 -29.7L25.8 -20.6L32.2 -7.3L32.2 7.3L25.8 20.6L14.3 29.7L0 33L-14.3 29.7L-25.8 20.6L-32.2 7.3L-32.2 -7.3L-25.8 -20.6L-14.3 -29.7Z" fill="#1095d3"/></g><g transform="translate(489 8)"><path d="M0 -16L6.9 -14.4L12.5 -10L15.6 -3.6L15.6 3.6L12.5 10L6.9 14.4L0 16L-6.9 14.4L-12.5 10L-15.6 3.6L-15.6 -3.6L-12.5 -10L-6.9 -14.4Z" fill="#1095d3"/></g><g transform="translate(367 255)"><path d="M0 -13L5.6 -11.7L10.2 -8.1L12.7 -2.9L12.7 2.9L10.2 8.1L5.6 11.7L0 13L-5.6 11.7L-10.2 8.1L-12.7 2.9L-12.7 -2.9L-10.2 -8.1L-5.6 -11.7Z" fill="#1095d3"/></g><g transform="translate(334 185)"><path d="M0 -17L7.4 -15.3L13.3 -10.6L16.6 -3.8L16.6 3.8L13.3 10.6L7.4 15.3L0 17L-7.4 15.3L-13.3 10.6L-16.6 3.8L-16.6 -3.8L-13.3 -10.6L-7.4 -15.3Z" fill="#1095d3"/></g><g transform="translate(378 464)"><path d="M0 -21L9.1 -18.9L16.4 -13.1L20.5 -4.7L20.5 4.7L16.4 13.1L9.1 18.9L0 21L-9.1 18.9L-16.4 13.1L-20.5 4.7L-20.5 -4.7L-16.4 -13.1L-9.1 -18.9Z" fill="#1095d3"/></g><g transform="translate(778 469)"><path d="M0 -14L6.1 -12.6L10.9 -8.7L13.6 -3.1L13.6 3.1L10.9 8.7L6.1 12.6L0 14L-6.1 12.6L-10.9 8.7L-13.6 3.1L-13.6 -3.1L-10.9 -8.7L-6.1 -12.6Z" fill="#1095d3"/></g><g transform="translate(783 83)"><path d="M0 -17L7.4 -15.3L13.3 -10.6L16.6 -3.8L16.6 3.8L13.3 10.6L7.4 15.3L0 17L-7.4 15.3L-13.3 10.6L-16.6 3.8L-16.6 -3.8L-13.3 -10.6L-7.4 -15.3Z" fill="#1095d3"/></g><g transform="translate(569 569)"><path d="M0 -12L5.2 -10.8L9.4 -7.5L11.7 -2.7L11.7 2.7L9.4 7.5L5.2 10.8L0 12L-5.2 10.8L-9.4 7.5L-11.7 2.7L-11.7 -2.7L-9.4 -7.5L-5.2 -10.8Z" fill="#1095d3"/></g><g transform="translate(865 510)"><path d="M0 -26L11.3 -23.4L20.3 -16.2L25.3 -5.8L25.3 5.8L20.3 16.2L11.3 23.4L0 26L-11.3 23.4L-20.3 16.2L-25.3 5.8L-25.3 -5.8L-20.3 -16.2L-11.3 -23.4Z" fill="#1095d3"/></g><g transform="translate(578 50)"><path d="M0 -9L3.9 -8.1L7 -5.6L8.8 -2L8.8 2L7 5.6L3.9 8.1L0 9L-3.9 8.1L-7 5.6L-8.8 2L-8.8 -2L-7 -5.6L-3.9 -8.1Z" fill="#1095d3"/></g><g transform="translate(28 53)"><path d="M0 -35L15.2 -31.5L27.4 -21.8L34.1 -7.8L34.1 7.8L27.4 21.8L15.2 31.5L0 35L-15.2 31.5L-27.4 21.8L-34.1 7.8L-34.1 -7.8L-27.4 -21.8L-15.2 -31.5Z" fill="#1095d3"/></g><g transform="translate(687 544)"><path d="M0 -15L6.5 -13.5L11.7 -9.4L14.6 -3.3L14.6 3.3L11.7 9.4L6.5 13.5L0 15L-6.5 13.5L-11.7 9.4L-14.6 3.3L-14.6 -3.3L-11.7 -9.4L-6.5 -13.5Z" fill="#1095d3"/></g><g transform="translate(17 235)"><path d="M0 -34L14.8 -30.6L26.6 -21.2L33.1 -7.6L33.1 7.6L26.6 21.2L14.8 30.6L0 34L-14.8 30.6L-26.6 21.2L-33.1 7.6L-33.1 -7.6L-26.6 -21.2L-14.8 -30.6Z" fill="#1095d3"/></g><g transform="translate(707 190)"><path d="M0 -18L7.8 -16.2L14.1 -11.2L17.5 -4L17.5 4L14.1 11.2L7.8 16.2L0 18L-7.8 16.2L-14.1 11.2L-17.5 4L-17.5 -4L-14.1 -11.2L-7.8 -16.2Z" fill="#1095d3"/></g><g transform="translate(549 425)"><path d="M0 -6L2.6 -5.4L4.7 -3.7L5.8 -1.3L5.8 1.3L4.7 3.7L2.6 5.4L0 6L-2.6 5.4L-4.7 3.7L-5.8 1.3L-5.8 -1.3L-4.7 -3.7L-2.6 -5.4Z" fill="#1095d3"/></g><g transform="translate(286 486)"><path d="M0 -20L8.7 -18L15.6 -12.5L19.5 -4.5L19.5 4.5L15.6 12.5L8.7 18L0 20L-8.7 18L-15.6 12.5L-19.5 4.5L-19.5 -4.5L-15.6 -12.5L-8.7 -18Z" fill="#1095d3"/></g><g transform="translate(268 325)"><path d="M0 -19L8.2 -17.1L14.9 -11.8L18.5 -4.2L18.5 4.2L14.9 11.8L8.2 17.1L0 19L-8.2 17.1L-14.9 11.8L-18.5 4.2L-18.5 -4.2L-14.9 -11.8L-8.2 -17.1Z" fill="#1095d3"/></g><g transform="translate(57 470)"><path d="M0 -4L1.7 -3.6L3.1 -2.5L3.9 -0.9L3.9 0.9L3.1 2.5L1.7 3.6L0 4L-1.7 3.6L-3.1 2.5L-3.9 0.9L-3.9 -0.9L-3.1 -2.5L-1.7 -3.6Z" fill="#1095d3"/></g><g transform="translate(93 554)"><path d="M0 -11L4.8 -9.9L8.6 -6.9L10.7 -2.4L10.7 2.4L8.6 6.9L4.8 9.9L0 11L-4.8 9.9L-8.6 6.9L-10.7 2.4L-10.7 -2.4L-8.6 -6.9L-4.8 -9.9Z" fill="#1095d3"/></g><g transform="translate(155 110)"><path d="M0 -29L12.6 -26.1L22.7 -18.1L28.3 -6.5L28.3 6.5L22.7 18.1L12.6 26.1L0 29L-12.6 26.1L-22.7 18.1L-28.3 6.5L-28.3 -6.5L-22.7 -18.1L-12.6 -26.1Z" fill="#1095d3"/></g><g transform="translate(666 18)"><path d="M0 -17L7.4 -15.3L13.3 -10.6L16.6 -3.8L16.6 3.8L13.3 10.6L7.4 15.3L0 17L-7.4 15.3L-13.3 10.6L-16.6 3.8L-16.6 -3.8L-13.3 -10.6L-7.4 -15.3Z" fill="#1095d3"/></g><g transform="translate(226 419)"><path d="M0 -26L11.3 -23.4L20.3 -16.2L25.3 -5.8L25.3 5.8L20.3 16.2L11.3 23.4L0 26L-11.3 23.4L-20.3 16.2L-25.3 5.8L-25.3 -5.8L-20.3 -16.2L-11.3 -23.4Z" fill="#1095d3"/></g><g transform="translate(853 417)"><path d="M0 -19L8.2 -17.1L14.9 -11.8L18.5 -4.2L18.5 4.2L14.9 11.8L8.2 17.1L0 19L-8.2 17.1L-14.9 11.8L-18.5 4.2L-18.5 -4.2L-14.9 -11.8L-8.2 -17.1Z" fill="#1095d3"/></g><g transform="translate(746 372)"><path d="M0 -34L14.8 -30.6L26.6 -21.2L33.1 -7.6L33.1 7.6L26.6 21.2L14.8 30.6L0 34L-14.8 30.6L-26.6 21.2L-33.1 7.6L-33.1 -7.6L-26.6 -21.2L-14.8 -30.6Z" fill="#1095d3"/></g><g transform="translate(465 569)"><path d="M0 -5L2.2 -4.5L3.9 -3.1L4.9 -1.1L4.9 1.1L3.9 3.1L2.2 4.5L0 5L-2.2 4.5L-3.9 3.1L-4.9 1.1L-4.9 -1.1L-3.9 -3.1L-2.2 -4.5Z" fill="#1095d3"/></g><g transform="translate(660 281)"><path d="M0 -16L6.9 -14.4L12.5 -10L15.6 -3.6L15.6 3.6L12.5 10L6.9 14.4L0 16L-6.9 14.4L-12.5 10L-15.6 3.6L-15.6 -3.6L-12.5 -10L-6.9 -14.4Z" fill="#1095d3"/></g><g transform="translate(95 5)"><path d="M0 -5L2.2 -4.5L3.9 -3.1L4.9 -1.1L4.9 1.1L3.9 3.1L2.2 4.5L0 5L-2.2 4.5L-3.9 3.1L-4.9 1.1L-4.9 -1.1L-3.9 -3.1L-2.2 -4.5Z" fill="#1095d3"/></g><g transform="translate(534 260)"><path d="M0 -12L5.2 -10.8L9.4 -7.5L11.7 -2.7L11.7 2.7L9.4 7.5L5.2 10.8L0 12L-5.2 10.8L-9.4 7.5L-11.7 2.7L-11.7 -2.7L-9.4 -7.5L-5.2 -10.8Z" fill="#1095d3"/></g><g transform="translate(401 48)"><path d="M0 -30L13 -27L23.5 -18.7L29.2 -6.7L29.2 6.7L23.5 18.7L13 27L0 30L-13 27L-23.5 18.7L-29.2 6.7L-29.2 -6.7L-23.5 -18.7L-13 -27Z" fill="#1095d3"/></g><g transform="translate(332 16)"><path d="M0 -28L12.1 -25.2L21.9 -17.5L27.3 -6.2L27.3 6.2L21.9 17.5L12.1 25.2L0 28L-12.1 25.2L-21.9 17.5L-27.3 6.2L-27.3 -6.2L-21.9 -17.5L-12.1 -25.2Z" fill="#1095d3"/></g><g transform="translate(647 479)"><path d="M0 -18L7.8 -16.2L14.1 -11.2L17.5 -4L17.5 4L14.1 11.2L7.8 16.2L0 18L-7.8 16.2L-14.1 11.2L-17.5 4L-17.5 -4L-14.1 -11.2L-7.8 -16.2Z" fill="#1095d3"/></g><g transform="translate(125 370)"><path d="M0 -32L13.9 -28.8L25 -20L31.2 -7.1L31.2 7.1L25 20L13.9 28.8L0 32L-13.9 28.8L-25 20L-31.2 7.1L-31.2 -7.1L-25 -20L-13.9 -28.8Z" fill="#1095d3"/></g><g transform="translate(437 135)"><path d="M0 -33L14.3 -29.7L25.8 -20.6L32.2 -7.3L32.2 7.3L25.8 20.6L14.3 29.7L0 33L-14.3 29.7L-25.8 20.6L-32.2 7.3L-32.2 -7.3L-25.8 -20.6L-14.3 -29.7Z" fill="#1095d3"/></g><g transform="translate(10 548)"><path d="M0 -36L15.6 -32.4L28.1 -22.4L35.1 -8L35.1 8L28.1 22.4L15.6 32.4L0 36L-15.6 32.4L-28.1 22.4L-35.1 8L-35.1 -8L-28.1 -22.4L-15.6 -32.4Z" fill="#1095d3"/></g><g transform="translate(230 191)"><path d="M0 -29L12.6 -26.1L22.7 -18.1L28.3 -6.5L28.3 6.5L22.7 18.1L12.6 26.1L0 29L-12.6 26.1L-22.7 18.1L-28.3 6.5L-28.3 -6.5L-22.7 -18.1L-12.6 -26.1Z" fill="#1095d3"/></g><g transform="translate(192 329)"><path d="M0 -35L15.2 -31.5L27.4 -21.8L34.1 -7.8L34.1 7.8L27.4 21.8L15.2 31.5L0 35L-15.2 31.5L-27.4 21.8L-34.1 7.8L-34.1 -7.8L-27.4 -21.8L-15.2 -31.5Z" fill="#1095d3"/></g><g transform="translate(445 280)"><path d="M0 -36L15.6 -32.4L28.1 -22.4L35.1 -8L35.1 8L28.1 22.4L15.6 32.4L0 36L-15.6 32.4L-28.1 22.4L-35.1 8L-35.1 -8L-28.1 -22.4L-15.6 -32.4Z" fill="#1095d3"/></g><g transform="translate(666 120)"><path d="M0 -17L7.4 -15.3L13.3 -10.6L16.6 -3.8L16.6 3.8L13.3 10.6L7.4 15.3L0 17L-7.4 15.3L-13.3 10.6L-16.6 3.8L-16.6 -3.8L-13.3 -10.6L-7.4 -15.3Z" fill="#1095d3"/></g><g transform="translate(241 9)"><path d="M0 -26L11.3 -23.4L20.3 -16.2L25.3 -5.8L25.3 5.8L20.3 16.2L11.3 23.4L0 26L-11.3 23.4L-20.3 16.2L-25.3 5.8L-25.3 -5.8L-20.3 -16.2L-11.3 -23.4Z" fill="#1095d3"/></g><g transform="translate(503 335)"><path d="M0 -15L6.5 -13.5L11.7 -9.4L14.6 -3.3L14.6 3.3L11.7 9.4L6.5 13.5L0 15L-6.5 13.5L-11.7 9.4L-14.6 3.3L-14.6 -3.3L-11.7 -9.4L-6.5 -13.5Z" fill="#1095d3"/></g><g transform="translate(184 573)"><path d="M0 -5L2.2 -4.5L3.9 -3.1L4.9 -1.1L4.9 1.1L3.9 3.1L2.2 4.5L0 5L-2.2 4.5L-3.9 3.1L-4.9 1.1L-4.9 -1.1L-3.9 -3.1L-2.2 -4.5Z" fill="#1095d3"/></g><g transform="translate(279 572)"><path d="M0 -29L12.6 -26.1L22.7 -18.1L28.3 -6.5L28.3 6.5L22.7 18.1L12.6 26.1L0 29L-12.6 26.1L-22.7 18.1L-28.3 6.5L-28.3 -6.5L-22.7 -18.1L-12.6 -26.1Z" fill="#1095d3"/></g><g transform="translate(578 127)"><path d="M0 -7L3 -6.3L5.5 -4.4L6.8 -1.6L6.8 1.6L5.5 4.4L3 6.3L0 7L-3 6.3L-5.5 4.4L-6.8 1.6L-6.8 -1.6L-5.5 -4.4L-3 -6.3Z" fill="#1095d3"/></g></g></svg>

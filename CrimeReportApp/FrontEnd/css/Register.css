@@ -1,0 +1,94 @@
+<html>
+  <link rel="stylesheet" type="text/css" href="css\MainStyles.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="loader.css">
+  <script src="Js\PageScroll.js"></script>
+  <head>
+    <title>Sign Up</title>
+    
+    </div>
+  </head>
+  <body>
+    <div class="loader">
+      <div class="loading-container">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+    </div>
+    
+    <header>
+      <nav>
+          <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">User</a></li>
+              <li><a href="#">Statistics</a></li>
+              <li><a href="#">Logout</a></li>
+          </ul>
+      </nav>
+  </header>
+
+    <div class="container_Center">
+      <div class="default_border">
+        <form>
+          <h1>Sign up</h1>
+          <div class="users">
+            <input type="text" name="" required="">
+            <label>Name</label>
+          </div>
+          <div class="users">
+            <input type="text" name="" required="">
+            <label>Surname</label>
+          </div>
+          <div class="users">
+            <input type="text" name="" required="">
+            <label>UserName</label>
+          </div>
+          <div class="users">
+            <input type="text" name="" required="">
+            <label>Email</label>
+          </div>
+          <div class="users">
+            <input type="password" name="" required="">
+            <label>Password</label>
+          </div>
+          <div class="users">
+            <input type="password" name="" required="">
+            <label>Confirm Password</label>
+          </div>
+  
+          <div class="users">
+            <button>Submit</button>
+            <button>Log In</button>
+          </div>
+        </form>
+      </div>
+      </div>
+    </div>
+  </body>
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="sidebar">
+          <h3>About Us</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
+        <div class="sidebar">
+          <h3>Connect With Us</h3>
+          <ul class="">
+            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+          </ul>
+        </div>
+        <div class="sidebar">
+          <h3>Contact Us</h3>
+          <p>123 Main St.<br>Anytown, USA 12345</p>
+          <p>Phone: 555-555-5555<br>Email: info@example.com</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</html>

@@ -1,0 +1,626 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0px;
+  padding: 0px;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  align-items: center;
+  background-color: #fff;
+  font-family: 'Lato', sans-serif;
+}
+
+
+/* Header Styles */
+header {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+z-index: 100;
+background-color: rgba(11, 95, 147, 0.8);
+padding: 20px;
+animation: fadeIn 0.5s ease-in-out;
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+nav {
+display: flex;
+justify-content: flex-end; /*Move everything in the nav to the right */
+}
+
+nav ul {
+list-style-type: none;
+margin: 0;
+padding: 0;
+display: flex;
+align-items: center;
+}
+
+nav ul li {
+display: inline-block;
+margin-right: 10px;
+}
+
+nav ul li a {
+color: #fff;
+text-decoration: none;
+padding: 10px 15px;
+border-radius: 5px;
+transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+background-color: #fff;
+color: #368BC1;
+}
+
+.logo {
+color: #fff;
+font-weight: bold;
+font-size: 24px;
+text-decoration: none;
+text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+animation: logoBounce 1s infinite alternate;
+}
+
+@keyframes logoBounce {
+0% {
+  transform: translateY(0);
+}
+100% {
+  transform: translateY(-5px);
+}
+}
+
+
+
+
+/* Search Area */
+.search-area {
+  margin-top: 100px;
+  margin-bottom: 50px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+}
+
+.search-box {
+  position: relative;;
+}
+
+.input-search {
+  height: 50px;
+  width: 50px;
+  border-style: none;
+  padding: 10px;
+  font-size: 18px;
+  letter-spacing: 2px;
+  outline: none;
+  border-radius: 25px;
+  transition: all .5s ease-in-out;
+  background-color: rgba(11, 95, 147, 0.8);
+  padding-right: 40px;
+  color: #130f40;
+}
+
+.input-search::placeholder {
+  color: rgba(19, 15, 64, 0.5);
+  font-size: 18px;
+  letter-spacing: 2px;
+  font-weight: 100;
+}
+
+.btn-search {
+  width: 50px;
+  height: 50px;
+  border-style: none;
+  font-size: 20px;
+  font-weight: bold;
+  outline: none;
+  cursor: pointer;
+  border-radius: 50%;
+  position: absolute;
+  right: 0px;
+  color: #130f40;
+  background-color: transparent;
+  pointer-events: painted;
+}
+
+.btn-search:focus ~ .input-search {
+  width: 300px;
+  border-radius: 0px;
+  background-color: transparent;
+  border-bottom: 1px solid rgba(19, 15, 64, 0.5);
+  transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+}
+
+.input-search:focus {
+  width: 300px;
+  border-radius: 0px;
+  background-color: transparent;
+  border-bottom: 1px solid rgba(19, 15, 64, 0.5);
+  transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+}
+
+.btn-search.active {
+  color: #368BC1;
+}
+
+/* Footer Styles */
+footer {
+  background-color: #f5f5f5;
+  padding: 20px 0;
+  color: #000;
+  text-align: center;
+  width: 100%;
+  margin-top: auto;
+}
+
+.footer {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.sidebar {
+  flex: 1 1 300px;
+  margin-bottom: 20px;
+}
+
+.sidebar h3 {
+  color: #368BC1;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.sidebar p {
+  color: #000;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.sidebar ul li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.sidebar ul li a {
+  color: #368BC1;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+/* Font Awesome Icons */
+.fa {
+  font-size: 24px;
+}
+
+.fa-facebook:hover {
+  color: #96acda;
+}
+
+.fa-twitter:hover {
+  color: #55acee;
+}
+
+.fa-instagram:hover {
+  color: #e4405f;
+}
+
+.fa-linkedin:hover {
+  color: #01334e;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+
+/* Crime Section */
+.crime-cards-scroll {
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 10px 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.crime-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  width: calc(100% + 40px); /* Adjust the width to create extra space for horizontal scrolling */
+}
+
+.crime-card {
+  flex: 0 0 auto;
+  max-width: 600px;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  border-radius: 5px;
+  margin: 0 10px;
+  transition: all 0.3s;
+}
+
+.crime-card:focus {
+  transform: scale(1.1);
+}
+
+.crime-title a {
+  color: #368BC1;
+  text-decoration: none;
+}
+
+.crime-description {
+  color: #000;
+  margin-bottom: 15px;
+}
+
+.crime-location {
+  color: #000;
+  margin-bottom: 15px;
+}
+
+.witness-btn {
+  background-color: #368BC1;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.witness-btn:hover {
+  background-color: #245f80;
+}
+
+.crime-navigation {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.crime-nav-btn {
+  background-color: #368BC1;
+  color: #fff;
+  padding: 5px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin: 0 5px;
+}
+
+.crime-nav-btn:hover {
+  background-color: #245f80;
+}
+
+.crime-nav-btn i {
+  font-size: 16px;
+}
+
+/* Additional styling for horizontal scrolling */
+.scroll-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.prev-btn {
+  left: 0;
+}
+
+.next-btn {
+  right: 0;
+}
+
+
+
+/* Left and Right Buttons */
+.scroll-btn {
+position: absolute;
+top: 50%;
+transform: translateY(-50%);
+background: none;
+border: none;
+cursor: pointer;
+font-size: 24px;
+color: #368BC1;
+transition: color 0.3s;
+}
+
+.scroll-btn:hover {
+color: #245f80;
+}
+
+.prev-btn {
+left: 0;
+}
+
+.next-btn {
+right: 0;
+}
+
+
+
+/*Crime Reporting Section*/
+.reporting-section {
+  background-color: #f5f5f5;
+  padding: 20px;
+  animation: fadeIn 0.5s ease-in-out;
+  margin-bottom: 20px;
+  margin: 20px;
+}
+
+.reporting-title {
+  color: #368BC1;
+  margin-bottom: 10px;
+}
+
+.reporting-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.reporting-input {
+  width: 300px;
+  height: 30px;
+  margin-bottom: 10px;
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+}
+
+.reporting-textarea {
+  width: 300px;
+  height: 100px;
+  margin-bottom: 10px;
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+}
+
+.reporting-button {
+  background-color: #368BC1;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.reporting-button:hover {
+  background-color: #245f80;
+}
+
+
+
+
+/*Login Styles*/
+
+.container_Center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.default_border {
+  max-width: 400px;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  padding: 30px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  color: #368BC1;
+  margin-bottom: 30px;
+}
+
+.users {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.users input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-bottom: 1px solid #368BC1;
+  outline: none;
+}
+
+.users label {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: #368BC1;
+  pointer-events: none;
+  transition: 0.2s ease all;
+}
+
+.users input:focus ~ label,
+.users input:valid ~ label {
+  top: -15px;
+  left: 0;
+  font-size: 12px;
+  color: #368BC1;
+}
+
+.users button {
+  background-color: #368BC1;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 5px;
+  transition: background-color 0.3s;
+}
+
+.users button:hover {
+  background-color: #245f80;
+}
+
+/*Register Styles*/
+
+.container_Register {
+display: flex;
+justify-content: center;
+align-items: center;
+height: 120vh;
+}
+
+.default_border {
+max-width: 400px;
+width: 100%;
+background-color: #fff;
+box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+padding: 30px;
+border-radius: 5px;
+text-align: center;
+}
+
+/* Add styles for the sign-up form */
+form {
+display: flex;
+flex-direction: column;
+}
+
+h1 {
+color: #368BC1;
+margin-bottom: 30px;
+}
+
+.users {
+position: relative;
+margin-bottom: 20px;
+}
+
+.users input {
+width: 100%;
+padding: 10px;
+font-size: 16px;
+border: none;
+border-bottom: 1px solid #368BC1;
+outline: none;
+}
+
+.users label {
+position: absolute;
+top: 10px;
+left: 10px;
+color: #368BC1;
+pointer-events: none;
+transition: 0.2s ease all;
+}
+
+.users input:focus ~ label,
+.users input:valid ~ label {
+top: -15px;
+left: 0;
+font-size: 12px;
+color: #368BC1;
+}
+
+.users button {
+background-color: #368BC1;
+color: #fff;
+padding: 10px 20px;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+margin: 5px;
+transition: background-color 0.3s;
+}
+
+.users button:hover {
+background-color: #245f80;
+}
+
+
+.sign-up-link {
+display: block;
+color: #368BC1;
+text-decoration: none;
+margin-top: 10px;
+font-size: 14px;
+}
+
+.sign-up-link:hover {
+text-decoration: underline;
+}
+
+
+/*Animation for form elements*/
+@keyframes fadeInUp {
+from {
+  opacity: 0;
+  transform: translateY(20px);
+}
+to {
+  opacity: 1;
+  transform: translateY(0);
+}
+}
+
+.form-animation {
+animation: fadeInUp 0.5s ease-in-out;
+}

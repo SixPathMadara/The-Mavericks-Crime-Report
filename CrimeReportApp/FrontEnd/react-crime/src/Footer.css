@@ -1,0 +1,102 @@
+/* Footer Styles */
+footer {
+    background-color: #f6f6f6;
+    padding: 20px 0;
+    color: #000;
+    text-align: center;
+    position: relative; /* Fixed positioning for footer */
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  .footer {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .footerRow {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .footerSidebar {
+    flex: 1 1 300px;
+    margin-bottom: 20px;
+  }
+  
+  .footerSidebar h3 {
+    color: #368BC1;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .footerSidebar p {
+    color: #000;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  .footerSidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .footerSidebar ul li {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  .footerSidebar ul li a {
+    color: #368BC1;
+    text-decoration: none;
+    font-size: 20px;
+  }
+  
+  
+  /* Font Awesome Icons */
+  .fa {
+    font-size: 24px;
+  }
+  
+  .fa-facebook:hover {
+    color: #96acda;
+  }
+  
+  .fa-twitter:hover {
+    color: #55acee;
+  }
+  
+  .fa-instagram:hover {
+    color: #e4405f;
+  }
+  
+  .fa-linkedin:hover {
+    color: #01334e;
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideIn {
+    from {
+      transform: translateY(-20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  

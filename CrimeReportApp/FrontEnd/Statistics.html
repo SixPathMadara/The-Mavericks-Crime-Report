@@ -1,0 +1,156 @@
+<html>
+  <link rel="stylesheet" type="text/css" href="css\statistics.css" />
+  <script async
+    src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=visualization&callback=initMap">
+  </script>
+  <script
+  src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+  </script>
+  <link flex href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+
+  <head>
+    <title>Statistics</title>
+    
+
+  </head>
+  <body>
+
+    <div class="header">
+      <nav >
+          <ul class="navigation_header">
+              <li><a href="#"><img src="css/Images/home/Home-icon.svg.png" id="header-icon"></a></li>
+              <li><a href="#"><img src="css/Images/home/login-icon.png" id="header-icon"></a></li>
+              <li><a href="#"><img src="css/Images/home/logout.png" id="header-icon"></a></li>
+          </ul>
+      </nav>
+    </div>
+    <div class="container">
+    <!--search bar-->
+    <div class="top_section">
+      <div class="Display">
+        <button ><img src="css/Images/home/map.png"></button>
+        <button ><img src="css/Images/home/graph.png"></button>
+      </div>
+    <div class="search_bar">
+      <p id="search">Search Area:</p>
+      <input type="text" placeholder="search..." id="search_input">
+    </div>
+    <nav class="sidebar1">
+    <div class="category">
+      <label for="dropdown" >Crime category</label>
+      <hr>
+      <select  id="dropdown">
+        <option value="Arson">Arson</option>
+        <option value="Burglary">Burglary</option>
+        <option value="Carjacking">Carjacking</option>
+        <option value="Homicide">homicide</option>
+        <option value="HumanTrafficking">Human trafficking</option>
+        <option value="IllegalDrugTrade">Illegal drug trade</option>
+        <option value="Kidnapping">Kidnapping</option>
+        <option value="Murder">Murder</option>
+        <option value="Theft">Theft</option>
+        <option value="Vandalism">Vandalism</option>
+        <option value="Violence">Violence</option>
+      </select>
+    </div>
+    </nav>
+    </div>
+  <div class="map-container">
+    <!--Map-->
+    <div class="container_Center">
+      <div class="default_border">
+          <div class="map">
+            <h1>Heat map</h1>
+            <div class="mapouter">
+            <div class="gmap_canvas"><iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=2880%20Broadway,%20New%20York&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+            <br>
+            <style>.mapouter{position:relative;text-align:right;height:500px;width:600px;}</style>
+            <a href="https://www.embedgooglemap.net">google maps widget html</a>
+            <style>.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:600px;}</style>
+            </div>
+            </div>
+          </div>
+      </div>
+    </div>
+    </div>
+    <div class="graph_container">
+      <div class="graphs">
+        <canvas id="graph1" style="width: 300px; height: 500px;"></canvas>
+        <canvas id="graph1" style="width: 300px; height: 500px;"></canvas>
+      </div>
+    </div>
+      <!--Stats-->
+      <div class="stats">
+        <div class="wrapper">
+          <div class="stats-container">
+             <span id="num" data-val="400">000</span>
+             <span id="text">Violence</span>
+            </div>
+            <div class="stats-container">
+              <span id="num" data-val="400">000</span>
+              <span id="text">Burglary</span>
+            </div>
+            <div class="stats-container">
+             <span id="num" data-val="400">000</span>
+             <span id="text">Human Trafficking</span>
+            </div>
+            <div class="stats-container">
+              <span id="num" data-val="400">000</span>
+              <span id="text">Illegal Drug Trade</span>
+            </div>
+            <div class="stats-container">
+              <span id="num" data-val="400">000</span>
+              <span id="text">Kidnapping</span>
+              
+            </div>
+            <div class="stats-container">
+              <span id="num" data-val="400">000</span>
+              <span id="text">Theft</span>
+          
+            </div>
+            <div class="stats-container">
+              <span id="num" data-val="400">000</span>
+              <span id="text">Vandilism</span>
+            </div>
+            <div class="stats-container">
+              <span id="num" data-val="400">000</span>
+              <span id="text">Arson</span>
+            </div>
+            <div class="stats-container">
+              <span id="num" data-val="400">000</span>
+              <span id="text">Carjacking</span>
+            </div>
+            <div class="stats-container">
+              <span id="num" data-val="400">000</span>
+              <span id="text">Homicide</span>
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  </body>
+<footer>
+  <div class="footer_container">
+    <div class="row">
+      <div class="about">
+        <h3>About Us</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      </div>
+      <div class="about">
+        <h3>Connect With Us</h3>
+        <ul class="">
+          <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+          <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+          <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+          <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+        </ul>
+      </div>
+      <div class="about">
+        <h3>Contact Us</h3>
+        <p>123 Main St.<br>Anytown, USA 12345</p>
+        <p>Phone: 555-555-5555<br>Email: info@example.com</p>
+      </div>
+    </div>
+  </div>
+</footer>
+</html>

@@ -1,0 +1,236 @@
+/*Crime Reporting Section*/
+.reporting-section {
+    background-color: #f5f5f5;
+    padding: 20px;
+    animation: fadeIn 0.5s ease-in-out;
+    margin: 20px;
+    max-width: 100%;
+    display: flex; /* Add flex display */
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center items horizontally */
+    text-align: center; /* Center text within the box */
+  }
+  
+  .reporting-title {
+    color: #368BC1;
+    margin-bottom: 10px;
+  }
+  
+  
+  .reporting-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+  }
+  
+  .reporting-input {
+    width: 300px;
+    height: 30px;
+    margin-bottom: 10px;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #000;
+  }
+  
+  .reporting-textarea {
+    width: 300px;
+    height: 100px;
+    margin-bottom: 10px;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    color: black;
+    background-color: #fff;
+  }
+  
+  .reporting-button {
+    background-color: #368BC1;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .reporting-button:hover {
+    background-color: #245f80;
+  }
+
+  .calendar-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    font-size: 1.25em;
+    color: #666; /* Adjust the color as needed */
+  }
+  
+
+
+/* User Report Styles */
+.container_Reports {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 80px;
+  }
+  
+  .Report_Post {
+    position: relative; 
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    animation: fadeInUp 1s ease-in-out;
+    transform-origin: top;
+    text-align: center;
+    transition: box-shadow 0.3s, transform 0.3s;
+  }
+  
+  /* Glow effect on hover */
+  .Report_Post:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transform: translateY(-5px);
+  }
+  
+  .Report_Header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  
+  .icon {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+  }
+  
+  .icon a {
+    font-size: 24px;
+    color: #368BC1;
+    text-decoration: none; 
+  }
+  
+  .iconType {
+    font-weight: bold;
+    margin-left: 5px;
+    color: #368BC1;
+    text-decoration: none; 
+  }
+  
+  .location {
+    margin-right: 10px;
+  }
+  
+  .time {
+    color: #555;
+  }
+  
+  .message {
+    margin-top: 10px;
+  }
+  
+  .eyeWitness {
+    display: none;
+  }
+  
+  /* Updated Checkbox Styles */
+  .eyeWitness + label {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1; 
+  }
+  
+  .eyeWitness + label:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #368BC1;
+    border-radius: 3px;
+    background-color: transparent;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  
+  .eyeWitness:checked + label:before {
+    background-color: #368BC1; 
+    border-color: #368BC1; 
+  }
+  
+  /* Checkbox animation */
+  .eyeWitness + label:after {
+    content: "\f00c"; /* Font Awesome checkmark icon */
+    font-family: FontAwesome;
+    position: absolute;
+    left: 3px;
+    top: 2px;
+    font-size: 16px;
+    color: #fff;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .eyeWitness:checked + label:after {
+    opacity: 1;
+  }
+  
+  /* Additional styling for the checkbox */
+  .eyeWitness + label:after {
+    content: "\f00c"; /* Font Awesome checkmark icon */
+    font-family: FontAwesome;
+    position: absolute;
+    left: 3px;
+    top: 2px;
+    font-size: 16px;
+    color: #fff;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .eyeWitness:checked + label:after {
+    opacity: 1;
+  }
+  
+  hr {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 10px 0;
+  }
+  
+  /* Custom Animations */
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes slideIn {
+    from {
+      transform: translateY(-20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }

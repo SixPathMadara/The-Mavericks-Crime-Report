@@ -1,0 +1,140 @@
+.EditUser_Container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    min-height: auto;
+}
+
+.ProfilePicture {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+.ProfilePictureIcon {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    margin-bottom: 10px; /* Adjust margin here */
+  }
+  
+  .ProfilePicture input[type="file"] {
+    margin-top: 10px;
+  }
+
+
+/*Register Styles*/
+.EditUser_Container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 160vh;
+    min-height: auto;
+    }
+    
+    .Register_Border {
+    /*max-width: 400px;
+    width: 100%;*/
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+    border-radius: 5px;
+    text-align: center;
+    }
+    
+    /* Add styles for the sign-up form */
+    form {
+    display: flex;
+    flex-direction: column;
+    }
+    
+    h1 {
+    color: #368BC1;
+    margin-bottom: 30px;
+    }
+    
+    .Register_Users {
+    position: relative;
+    margin-bottom: 20px;
+    }
+    
+    .Register_Users input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-bottom: 1px solid #368BC1;
+    outline: none;
+    background-color: #fff;
+    color: black;
+    }
+    
+    .Register_Users label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: #368BC1;
+    pointer-events: none;
+    transition: 0.2s ease all;
+    }
+    
+    .Register_Users input:focus ~ label,
+    .Register_Users input:valid ~ label {
+    top: -15px;
+    left: 0;
+    font-size: 12px;
+    color: #368BC1;
+    }
+    
+    .Edit_Users button {
+    background-color: #368BC1;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+    transition: background-color 0.3s;
+    }
+    
+    .Edit_Users button:hover {
+    background-color: #245f80;
+    }
+    
+    
+    .profile-link {
+    display: block;
+    color: #368BC1;
+    text-decoration: none;
+    margin-top: 10px;
+    font-size: 14px;
+    }
+    
+    .profile-link:hover {
+    text-decoration: underline;
+    }
+    
+    
+    /*Animation for form elements*/
+    @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    }
+    
+    .form-animation {
+    animation: fadeInUp 0.5s ease-in-out;
+    }
+    
